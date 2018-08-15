@@ -1,0 +1,6 @@
+<h2>Nombre: <%= @un_evento.nombre %></h2>
+<h2>Participantes: <%= @un_evento.participantes %></h2>
+
+<% @personas.each do |persona| %>
+    <% persona.nombre %>
+<% end %>

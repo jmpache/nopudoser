@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Calculadora de asados</title>
+    <link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css' rel='stylesheet' />
+  </head>
+  <body class='container'>
+    <h1><%= @title %></h1>
+    <form action='/agregarParticipantes' method='post'>
+      <ul class='unstyled'>
+        <p>Ingrese el titulo del evento:</p>
+        <input type="text" name="titulo"/></br>
+        <p>Ingrese cantidad de participantes:</p>
+        <input type="text" name="participantes"/></br>
+      </ul>
+      <button type='submit' class='btn btn-primary'>Siguiente!</button>
+    </form>
+    ---
+    ---
+    <a href="/eventos">Ver eventos</a>
+    
+
+    
+  </body>
+</html>

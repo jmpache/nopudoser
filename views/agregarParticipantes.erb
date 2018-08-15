@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Paso 2!</title>
+    <link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css' rel='stylesheet' />
+  </head>
+  <body class='container'>
+    <h1><%= @title %></h1>
+    <form action='/crearEvento' method='post'>
+      <% for i in (1..@cant) %>
+        <p>Nombre del chabon:</p>
+        <input type="text" name="nombre"/>
+        <p>Dinero que puso:</p>
+        <input type="text" name="dinero"/></br>
+        --------------------------------------------------------</br>
+      <% end %>
+      <button type='submit' class='btn btn-primary'>Siguiente!</button>
+    </form>
+  </body>
+</html>
