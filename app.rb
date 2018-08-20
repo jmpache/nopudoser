@@ -17,6 +17,7 @@ class Persona
     property :id, Serial
     property :nombre, String
     property :evento_id, Integer
+    property :total, Integer
 
     belongs_to :evento
     has n, :gastos

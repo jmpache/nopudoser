@@ -1,13 +1,17 @@
 <h2>Nombre del evento: <%= @un_evento.nombre %></h2>
 <h2>Personas que asisten: </h2>
+<%acumtotal = 0%>
 <% @personitas.each do |persona| %>
+<%acum = 0%>
     <% if persona.evento_id == @un_evento.id %>
         <h3><%= persona.nombre %> gasto:
             <% @moneda.each do |gastado| %>
                 <% if gastado.persona_id == persona.id%>
                     <p><%= gastado.dinero%> en <%= gastado.descripcion%></p>
+                    <% acum += gastado.dinero%>
                 <%end%>
             <%end%>
+            <p>gasto $<%= acum %> en total</p>
         </br><h3>
     <% end %>
 <% end %>
