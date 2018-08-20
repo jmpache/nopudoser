@@ -7,11 +7,13 @@
         <h3><%= persona.nombre %> gasto:
             <% @moneda.each do |gastado| %>
                 <% if gastado.persona_id == persona.id%>
-                    <p><%= gastado.dinero%> en <%= gastado.descripcion%></p>
+                    <p>$<%= gastado.dinero%> en <%= gastado.descripcion%></p>
                     <% acum += gastado.dinero%>
+                    <%acumtotal += acum%>
                 <%end%>
             <%end%>
             <p>gasto $<%= acum %> en total</p>
         </br><h3>
     <% end %>
 <% end %>
+<h2> Se gasto en total en este evento $<%= acumtotal%></h2>
