@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>Programacion 3 - HAML</title>
+    <link rel="stylesheet" href="/css/styles.css"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="/js/scripts.js"></script>
+  </head>
+  <body>
+    <% if @@evento_activo %>
+      <%= @@evento_activo.nombre %>
+    <% end %>
+    <div class="container">
+      <header>
+        <a href="/">
+          <h2>
+            <img src="http://i1178.photobucket.com/albums/x376/grandiose00doll/pixel%20food/mystery_meat_by_bakariboss-d35zbbv.gif">
+            CALCULATE el ASA2
+            <img src="http://i1178.photobucket.com/albums/x376/grandiose00doll/pixel%20food/mystery_meat_by_bakariboss-d35zbbv.gif">
+          </h2>
+        </a>
+      </header>
+      
+      <div id="yield">
+        
+
+        <%= yield %>
+
+
+      </div>
+
+      <script src="/js/bootstrap.min.js" />
+    </body>
+  </div>
+</html>

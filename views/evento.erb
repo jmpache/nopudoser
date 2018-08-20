@@ -1,6 +1,13 @@
-<h2>Nombre: <%= @un_evento.nombre %></h2>
-<h2>Participantes: <%= @un_evento.participantes %></h2>
-
-<% @personas.each do |persona| %>
-    <% persona.nombre %>
+<h2>Nombre del evento: <%= @un_evento.nombre %></h2>
+<h2>Personas que asisten: </h2>
+<% @personitas.each do |persona| %>
+    <% if persona.evento_id == @un_evento.id %>
+        <h3><%= persona.nombre %> gasto:
+            <% @moneda.each do |gastado| %>
+                <% if gastado.persona_id == persona.id%>
+                    <p><%= gastado.dinero%> en <%= gastado.descripcion%></p>
+                <%end%>
+            <%end%>
+        </br><h3>
+    <% end %>
 <% end %>

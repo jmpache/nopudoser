@@ -1,52 +1,81 @@
 require 'sinatra'
 require 'data_mapper'
 
-
 DataMapper.setup(:default, 'sqlite:db/development.db')
 DataMapper::Logger.new($stdout, :debug)
 
 class Evento
     include DataMapper::Resource
     property :id, Serial
-    property :participantes, Integer
     property :nombre, String
+
+    has n, :personas
 end
 
 class Persona
     include DataMapper::Resource
     property :id, Serial
     property :nombre, String
+    property :evento_id, Integer
+
+    belongs_to :evento
+    has n, :gastos
+end
+
+class Gasto
+    include DataMapper::Resource
+    property :id, Serial
+    property :descripcion, String
     property :dinero, Integer
+    property :persona_id, Integer
+
+    belongs_to :persona
 end
 
 Evento.auto_upgrade!
 Persona.auto_upgrade!
+Gasto.auto_upgrade!
 DataMapper.finalize
+
+@@evento_activo = nil
 
 get '/' do
     @title = 'Crea el evento!'
     erb :index
 end
 
-post '/agregarParticipantes' do
-    @title = params[:titulo]
-    @cant = params[:participantes].to_i
-    erb :agregarParticipantes
-end
-
-post "/crearEvento" do
+post '/crear_evento' do
     joda = Evento.new
-    joda.participantes = 2
-    joda.nombre = "caca"
+    joda.nombre = params[:titulo]
     joda.save
 
-    chabon = Persona.new
-    chabon.id = joda.id
-    chabon.nombre = params[:nombre]
-    chabon.dinero = params[:dinero]
-    chabon.save
+    @@evento_activo = joda
+    redirect '/agregar_participantes'
+end
 
-    redirect '/'
+get "/agregar_participantes" do
+    @joda = Evento.get(@@evento_activo.id)
+    erb :agregar_participantes
+end
+
+post "/agregar_participantes" do
+    joda = Evento.get(@@evento_activo.id)
+    chabon = joda.personas.new
+    chabon.nombre = params[:nombre]
+    chabon.save
+    joda.save
+
+    redirect '/agregar_participantes'
+end
+
+post "/cargar_gasto" do
+    gastado = Gasto.new
+    gastado.dinero = params[:importe].to_i
+    gastado.persona_id = params[:id].to_i
+    gastado.descripcion = params[:descripcion]
+    gastado.save
+    
+    redirect '/agregar_participantes'
 end
 
 get '/eventos' do
@@ -55,12 +84,12 @@ get '/eventos' do
 end
 
 get '/evento/:id' do
-    @personas = Persona.all
     @un_evento = Evento.get(params[:id])
+    @personitas = Persona.all
+    @moneda = Gasto.all
+
     erb :evento
 end
 
 
-
-
-
+# una vista de calcuo, que sume los gastos, y los divida por personas
