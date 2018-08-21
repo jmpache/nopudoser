@@ -1,18 +1,18 @@
 
-<h1 class="capitalais">· <%= @joda.nombre %></h1></br>
+<h1 id="titulo_evento_np" class="capitalais"> <%= @joda.nombre %></h1></br>
 <div class="caja_nuevo_participante">
-    <h4 class="centra_texto">Agrega gentusa:</h4>
+    <h4 id="agrega_gentusa" class="centra_texto">Agrega gentusa:</h4>
     <form id="input_nuevo_participante" action='/agregar_participantes' method='post'>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-default">Nombre</span>
             </div>
-            <input type="text" class="form-control" name="nombre" maxlength="20"/>
+            <input type="text" class="form-control" name="nombre" maxlength="8" required/>
             <button type='submit' class='btn btn-primary'>Agregar!</button>
         </div>
     </form>
 </div></br>
-<h5><strong>Participantes:</strong></h5>
+<h5 id="particip"><strong>Participantes:</strong></h5>
 <% @joda.personas.each do |chaval| %>
     <hr>
     <p>
@@ -25,7 +25,7 @@
                     <span class="input-group-text">gastó</span>
                     <span class="input-group-text">$</span>
                 </div>
-                <input type="text" name="importe" class="form-control" pattern="[1-9]{1,6}" required/>
+                <input id="input_dinero" type="text" name="importe" class="form-control" pattern="[0-9]{1,6}" required/>
                 <input type="hidden" name="id" value="<%= chaval.id%>" class="form-control"/>
             </div>
         </div>
@@ -34,16 +34,26 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">en:</span>
                 </div>
-                <input type="text" name="descripcion" class="form-control" maxlength="20" required/>
+                <input id="input_dinero" type="text" name="descripcion" class="form-control" maxlength="20" required/>
                 <button type="submit" class='btn btn-primary'>Cargar</button>
             </div>
         </div>
     </div>
     </p>
     </form>
-    <% @joda.personas.gastos.each do |cash|%>
-    <p><strong>·</strong> $
-        <strong><%= cash.dinero %></strong>
-        en <strong><%= cash.descripcion %></strong>
-    <%end%>
+    <% total = 0 %>
+    <% @joda.personas.each do |personaka| %>
+        <% @joda.personas.gastos.each do |casheano| %>
+            <% if casheano.persona_id == personaka.id %>
+                <%= personaka.id %>
+                <p><strong>·</strong> $
+                <strong><%= casheano.dinero %></strong>
+                <% total += casheano.dinero %>
+                en <strong><%= casheano.descripcion %></strong>   
+            <% end %> <br>
+            
+        <% end %>
+        
+    <% end %>
+    <h3 class="total_texto">Total: <%= total %></h3>
 <% end %>

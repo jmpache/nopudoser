@@ -1,10 +1,11 @@
-<h2>Nombre del evento: <%= @un_evento.nombre %></h2>
-<h2>Personas que asisten: </h2>
+<hr>
+<p id="nomevent"><%= @un_evento.nombre %></p>
+<p id="perqasis">PERSONAS QUE ASISTEN: </p>
 <%acumtotal = 0%>
 <% @personitas.each do |persona| %>
 <%acum = 0%>
     <% if persona.evento_id == @un_evento.id %>
-        <h3><%= persona.nombre %> gasto:
+        <p><strong><%= persona.nombre %></strong>
             <% @moneda.each do |gastado| %>
                 <% if gastado.persona_id == persona.id%>
                     <p>$<%= gastado.dinero%> en <%= gastado.descripcion%></p>
@@ -12,8 +13,8 @@
                     <%acumtotal += acum%>
                 <%end%>
             <%end%>
-            <p>gasto $<%= acum %> en total</p>
-        </br><h3>
+            <p id="entotal">gasto $<%= acum %> en total</p>
+        </br><p>
     <% end %>
 <% end %>
-<h2> Se gasto en total en este evento $<%= acumtotal%></h2>
+<h2> Total gastado: $<%= acumtotal%></h2>

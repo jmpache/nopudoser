@@ -1,6 +1,6 @@
-<h1 class="centra_texto"><%= @title %></h1>
+<h1 id="titulo_index" class="centra_texto"><%= @title %></h1>
 <form action='/crear_evento' method='post'>
-  <p class="centra_texto">Ingrese el titulo del evento:</p>
+  <p id="sub_titulo_index" class="centra_texto">Ingresa el titulo del evento:</p>
   <div id="input_titulo">
     <div class="input-group input-group-lg">
       <input type="text" class="form-control" name="titulo" maxlength="30" required/></br>
@@ -10,4 +10,4 @@
   </div>
   
 </form>
-<a href="/eventos">Ver eventos</a>
+-<a id="link_eventos" href="/eventos">Ver eventos</a>-

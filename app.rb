@@ -39,6 +39,7 @@ Gasto.auto_upgrade!
 DataMapper.finalize
 
 @@evento_activo = nil
+@@ultima_persona = nil
 
 get '/' do
     @title = 'Crea el evento!'
@@ -66,6 +67,7 @@ post "/agregar_participantes" do
     chabon.save
     joda.save
 
+    @@ultima_persona = chabon
     redirect '/agregar_participantes'
 end
 
